@@ -1,0 +1,28 @@
+.results-container {
+  text-align: center;
+}
+
+.question-details-container {
+  /* text-align: left; */
+  margin-bottom: 30px;
+}
+
+.question-row:not(:last-child) {
+  margin-bottom: 25px;
+}
+
+.correct {
+  color: green;
+}
+
+.incorrect {
+  color: red;
+}
+
+.question {
+  font-weight: bold;
+}
+
+.user-response {
+  margin-top: 15px;
+}

@@ -1,0 +1,18 @@
+.quiz-container {
+  text-align: center;
+}
+
+button:not(:last-child) {
+  margin-right: 10px;
+}
+
+.restart-btn {
+  font-size: 14px;
+  text-decoration: none;
+  color: #333333;
+}
+
+.restart-btn:hover {
+  text-decoration: none;
+  color: red;
+}
