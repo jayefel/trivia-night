@@ -3,8 +3,8 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import './App.css';
 
 const HomeComponent = lazy(() => import('./home/HomeComponent'));
-const QuizComponent = lazy(() => import('./quiz/QuizComponent'));
-const ResultsComponent = lazy(() => import('./results/ResultsComponent'));
+const QuizContainer = lazy(() => import('./quiz/QuizContainer'));
+const ResultsContainer = lazy(() => import('./results/ResultsContainer'));
 
 const Spinner = () => {
   return (
@@ -22,8 +22,8 @@ const App = () => {
             <BrowserRouter>
               <Switch>
                 <Route path='/' exact component={HomeComponent} />
-                <Route path='/quiz' component={QuizComponent} />
-                <Route path='/results' component={ResultsComponent} />
+                <Route path='/quiz' component={QuizContainer} />
+                <Route path='/results' component={ResultsContainer} />
               </Switch>
             </BrowserRouter>
           </Suspense>

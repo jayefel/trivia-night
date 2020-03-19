@@ -36,7 +36,6 @@ export const quizReducer = (state = initialState, action) => {
       };
 
       if (quiz.questions[questionIndex].userResponse === quiz.questions[questionIndex].correctAnswer) {
-        console.log('answered correctly, incrementing score');
         quiz.score = quiz.score + 1;
       }
 

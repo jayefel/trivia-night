@@ -1,20 +1,18 @@
 import React, { useMemo } from 'react';
-import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-
 import './ResultsComponent.css';
+import LoadingComponent from '../LoadingComponent';
 
 const ResultsComponent = ({ quiz }) => {
-  console.log('ResultsComponent quiz prop: ', quiz);
-  const score = () => {
+  const score = useMemo(() => {
     return (
       <span>{quiz.score}/{quiz.questions.length}</span>
     )
-  };
+  }, [quiz]);
 
   const quizResponseDetails = useMemo(() => {
-    if (!quiz.questions.length) {
-      return <h1>Loading Results...</h1>;
+    if (quiz.questions.length === 0) {
+      return <LoadingComponent />;
     }
 
     return quiz.questions.map(q => {
@@ -48,7 +46,7 @@ const ResultsComponent = ({ quiz }) => {
     <div className="results-container">
       <h2>
         You scored <br />
-        {score()}
+        {score}
       </h2>
       <div className="question-details-container">
         {quizResponseDetails}
@@ -58,28 +56,4 @@ const ResultsComponent = ({ quiz }) => {
   )
 };
 
-const withRedirectIfQuizIncomplete = WrappedComponent => {
-  class ComposedComponent extends React.Component {
-    componentDidMount() {
-      this.shouldNavigateAway();
-    }
-
-    shouldNavigateAway() {
-      if (!this.props.quiz.completed) {
-        this.props.history.push('/');
-      }
-    }
-
-    render() {
-      return <WrappedComponent {...this.props} />
-    }
-  }
-
-  const mapStateToProps = (state) => {
-    return { quiz: state.quiz };
-  };
-
-  return connect(mapStateToProps)(ComposedComponent);
-}
-
-export default withRedirectIfQuizIncomplete(ResultsComponent);
+export default ResultsComponent;
