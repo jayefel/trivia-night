@@ -10,6 +10,8 @@ button:not(:last-child) {
   font-size: 14px;
   text-decoration: none;
   color: #333333;
+  display: block;
+  margin-top: 30px;
 }
 
 .restart-btn:hover {

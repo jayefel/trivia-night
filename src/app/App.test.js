@@ -2,9 +2,9 @@ import React from 'react';
 import { shallow } from "enzyme";
 import App from './App';
 
-describe('App component', () => {
-  it('renders without error', () => {
-    const wrapped = shallow(<App />);
-    expect(wrapped.length).toBe(1);
+describe('the App component', () => {
+  it('should render without error', () => {
+    const wrapper = shallow(<App />);
+    expect(wrapper).toHaveLength(1);
   });
 });

@@ -1,22 +1,46 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import LoadingComponent from '../common/LoadingComponent';
 import './QuizComponent.css';
-import LoadingComponent from '../LoadingComponent';
 
-const currentQuestionNumber = (questionIndex) => {
-  return questionIndex + 1;
+export const QuizErrorComponent = () => {
+  return <h1 className="quiz-fetch-error">An error occured while loading the game.</h1>;
 };
+
+export const StartOverLink = React.memo(() => (
+  <Link className="mx-auto restart-btn" to="/">
+    <i className="fa fa-redo"></i> Start Over
+  </Link>
+));
+
+export const QuestionPagination = ({ currentQuestionIndex, totalNumOfQuestions }) => (
+  <p>{currentQuestionIndex + 1} of {totalNumOfQuestions}</p>
+);
+
+export const UserResponseButtons = ({ handleUserResponse }) => (
+  <div className="response-buttons-container">
+    <button className="btn btn-md btn-success" onClick={() => handleUserResponse(true)}>
+      <i className="fa fa-thumbs-up"></i> TRUE
+    </button>
+    <button className="btn btn-md btn-danger" onClick={() => handleUserResponse(false)}>
+      <i className="fa fa-thumbs-down"></i> FALSE
+    </button>
+  </div>
+);
 
 const QuizComponent = ({
   history,
-  quiz: { questions },
-  fetchQuestions,
+  quiz: { questions, loading, error },
+  fetchQuiz,
   submitAnswer
 }) => {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
 
-  const handleQuestionResponse = userResponse => {
-    submitAnswer(currentQuestionIndex, userResponse);
+  const handleUserResponse = userResponse => {
+    submitAnswer({
+      questionIndex: currentQuestionIndex,
+      userResponse
+    });
     setCurrentQuestionIndex(current => current + 1);
 
     if (currentQuestionIndex === questions.length - 1) {
@@ -25,34 +49,29 @@ const QuizComponent = ({
   };
 
   useEffect(() => {
-    fetchQuestions();
-  }, [fetchQuestions]);
+    fetchQuiz();
+  }, [fetchQuiz]);
 
-  if (questions.length === 0) {
+  if (error) {
+    return <QuizErrorComponent />;
+  }
+
+  if (loading) {
     return <LoadingComponent />;
   }
 
   const {
-    id,
     category,
     question
   } = questions[currentQuestionIndex];
 
   return (
-    <div className="quiz-container" key={id}>
-      <h2>{category}</h2>
-      <h5>{question}</h5>
-      <p>{currentQuestionNumber(currentQuestionIndex)} of {questions.length}</p>
-      <button className="btn btn-md btn-success" onClick={() => handleQuestionResponse(true)}>
-        <i className="fa fa-check"></i> True
-          </button>
-      <button className="btn btn-md btn-danger" onClick={() => handleQuestionResponse(false)}>
-        <i className="fa fa-times"></i> False
-          </button>
-      <br /><br />
-      <Link className="mx-auto restart-btn" to="/">
-        <i className="fa fa-redo"></i> Start Over
-      </Link>
+    <div className="quiz-container">
+      <h2 className="category">{category}</h2>
+      <h5 className="question">{question}</h5>
+      <QuestionPagination currentQuestionIndex={currentQuestionIndex} totalNumOfQuestions={questions.length} />
+      <UserResponseButtons handleUserResponse={handleUserResponse} />
+      <StartOverLink />
     </div>
   );
 };

@@ -1,36 +1,27 @@
 import React from 'react';
-import { shallow, mount, EnzymeAdapter, ReactWrapper } from 'enzyme';
+import { shallow, ShallowWrapper } from 'enzyme';
 import HomeComponent from './HomeComponent';
-import { BrowserRouter } from 'react-router-dom';
-import { WSAVERNOTSUPPORTED } from 'constants';
 
 describe('HomeComponent', () => {
-  let wrapper: ReactWrapper;
+  let wrapper: ShallowWrapper;
 
   beforeEach(() => {
-    wrapper = mount(
-      <BrowserRouter>
-        <HomeComponent />
-      </BrowserRouter>);
+    wrapper = shallow(<HomeComponent />);
   });
 
-  afterEach(() => {
-    wrapper.unmount();
+  it('should render without error', () => {
+    expect(wrapper).toHaveLength(1);
   });
 
-  test('renders without error', () => {
-    expect(wrapper.length).toBe(1);
+  it('should have a title element', () => {
+    expect(wrapper.find('.heading')).toHaveLength(1);
   });
 
-  test('has a title element', () => {
-    expect(wrapper.find('.heading').length).toBe(1);
+  it('should have a introduction paragrph', () => {
+    expect(wrapper.find('.introduction')).toHaveLength(1);
   });
 
-  test('has game introduction paragrph', () => {
-    expect(wrapper.find('.introduction').length).toBe(1);
-  });
-
-  test('has game start button', () => {
-    expect(wrapper.find('a#start-btn').length).toBe(1);
+  it('should have a `BEGIN` button', () => {
+    expect(wrapper.find('#start-btn')).toHaveLength(1);
   });
 });

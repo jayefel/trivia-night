@@ -2,10 +2,10 @@ import Axios from 'axios';
 import { decode } from 'he';
 import { Dispatch } from 'redux';
 import {
-  fetchQuestionsRequest,
-  fetchQuestionsSuccess,
-  fetchQuestionsFailed
-
+  fetchQuizRequest,
+  fetchQuizSuccess,
+  fetchQuizFailed,
+  submitAnswer
 } from './actions';
 
 type Question = {
@@ -15,11 +15,11 @@ type Question = {
   correctAnswer: boolean
 };
 
-export const fetchQuestions = () => {
+export const fetchQuiz = () => {
   return (dispatch: Dispatch) => {
-    dispatch(fetchQuestionsRequest());
+    dispatch(fetchQuizRequest());
 
-    Axios.get('https://opentdb.com/api.php?amount=10&difficulty=hard&type=boolean')
+    return Axios.get('https://opentdb.com/api.php?amount=10&difficulty=hard&type=boolean')
       .then((res: any) => {
         const questions: Question[] = res.data.results.map((question: any, index: number) => ({
           id: index,
@@ -29,10 +29,15 @@ export const fetchQuestions = () => {
           userResponse: null
         }));
 
-        dispatch(fetchQuestionsSuccess(questions));
+        dispatch(fetchQuizSuccess(questions));
       })
       .catch((err: Error) => {
-        dispatch(fetchQuestionsFailed(err))
+        dispatch(fetchQuizFailed(err))
       });
-  }
+  };
+};
+
+export default {
+  fetchQuiz,
+  submitAnswer
 };

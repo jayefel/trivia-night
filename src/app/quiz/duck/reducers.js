@@ -1,47 +1,46 @@
 import * as actionTypes from './types';
 
-const initialState = {
+export const initialState = {
+  score: 0,
   questions: [],
+  loading: true,
   completed: false,
-  score: 0
+  error: false
 };
 
 /**
  * Reducer for questions, responsible for fetching questions from the provided API or fail
  * @function quizReducer
- * @param state 
- * @param action 
+ * @param state
+ * @param action
  */
 export const quizReducer = (state = initialState, action) => {
   switch (action.type) {
-    case actionTypes.FETCH_QUESTIONS_REQUEST:
+    case actionTypes.FETCH_QUIZ_REQUEST:
       return initialState;
 
-    case actionTypes.FETCH_QUESTIONS_SUCCESS:
-      return { ...state, questions: action.payload };
+    case actionTypes.FETCH_QUIZ_SUCCESS:
+      return { ...state, loading: false, questions: action.payload };
 
-    case actionTypes.FETCH_QUESTIONS_FAILURE:
-      return state;
-
-    case actionTypes.RESET_QUESTIONS:
-      return initialState;
+    case actionTypes.FETCH_QUIZ_FAILED:
+      return { ...state, loading: false, error: action.payload };
 
     case actionTypes.SUBMIT_ANSWER:
+      const newState = { ...state };
       const { questionIndex, userResponse } = action.payload;
-      const quiz = { ...state };
-      quiz.questions[questionIndex].userResponse = userResponse;
+      newState.questions[questionIndex].userResponse = userResponse;
 
-      if (questionIndex === quiz.questions.length - 1) {
-        quiz.completed = true;
+      if (questionIndex === newState.questions.length - 1) {
+        newState.completed = true;
       };
 
-      if (quiz.questions[questionIndex].userResponse === quiz.questions[questionIndex].correctAnswer) {
-        quiz.score = quiz.score + 1;
+      if (newState.questions[questionIndex].userResponse === newState.questions[questionIndex].correctAnswer) {
+        newState.score = newState.score + 1;
       }
 
-      return quiz;
+      return newState;
 
     default:
-      return state; // TODO: throw an error instead
+      return state;
   }
 };

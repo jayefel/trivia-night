@@ -1,14 +1,7 @@
 /**
- * Action types for answers
+ * Action types for quizReducer
  */
-export const RESET_ANSWERS = 'RESET_ANSWERS';
+export const FETCH_QUIZ_REQUEST = 'FETCH_QUIZ_REQUEST';
+export const FETCH_QUIZ_SUCCESS = 'FETCH_QUIZ_SUCCESS';
+export const FETCH_QUIZ_FAILED = 'FETCH_QUIZ_FAILED';
 export const SUBMIT_ANSWER = 'SUBMIT_ANSWER';
-
-
-/**
- * Action types for questions
- */
-export const FETCH_QUESTIONS_REQUEST = 'FETCH_QUESTIONS_REQUEST';
-export const FETCH_QUESTIONS_SUCCESS = 'FETCH_QUESTIONS_SUCCESS';
-export const FETCH_QUESTIONS_FAILURE = 'FETCH_QUESTIONS_FAILURE';
-export const RESET_QUESTIONS = 'RESET_QUESTIONS';
