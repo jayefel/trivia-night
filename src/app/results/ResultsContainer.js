@@ -9,7 +9,9 @@ const withRedirectIfQuizIncomplete = WrappedComponent => {
     }
 
     shouldNavigateAway() {
-      if (!this.props.quiz.completed) {
+      const { quiz } = this.props;
+
+      if (!quiz.completed || !quiz.questions.length) {
         this.props.history.push('/');
       }
     }

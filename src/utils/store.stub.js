@@ -1,3 +1,6 @@
+/**
+ * A stub for the app store for testing purposes
+ */
 export const storeStub = {
   quiz: {
     score: 0,
