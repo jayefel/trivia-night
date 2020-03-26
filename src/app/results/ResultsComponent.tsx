@@ -1,9 +1,14 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { Quiz } from '../quiz/duck/types';
 import QuestionResponseComponent from './QuestionResponseComponent';
 import './ResultsComponent.css';
 
-const ResultsComponent = ({ quiz }) => {
+interface ResultsComponentProps {
+  quiz: Quiz;
+}
+
+const ResultsComponent: React.FC<ResultsComponentProps> = ({ quiz }): JSX.Element => {
   return (
     <div className="results-container">
       <h2>

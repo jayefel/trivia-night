@@ -1,7 +1,7 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React from 'react';
+import { Link } from 'react-router-dom';
 
-function NotFoundComponent() {
+function NotFoundComponent(): JSX.Element {
   return (
     <div>
       <h1>404</h1>

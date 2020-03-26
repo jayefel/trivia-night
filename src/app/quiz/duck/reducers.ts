@@ -1,6 +1,8 @@
-import * as actionTypes from './types';
+import { Reducer } from 'react';
+import { Quiz, FetchQuizActions } from './types';
+import * as actionTypes from './actionTypes';
 
-export const initialState = {
+export const initialState: Quiz = {
   score: 0,
   questions: [],
   loading: true,
@@ -11,10 +13,10 @@ export const initialState = {
 /**
  * Reducer for questions, responsible for fetching questions from the provided API or fail
  * @function quizReducer
- * @param state
- * @param action
+ * @param state - current state of the store
+ * @param action - action to be applied ot the state
  */
-export const quizReducer = (state = initialState, action) => {
+export const quizReducer: Reducer<Quiz, FetchQuizActions> = (state = initialState, action): Quiz => {
   switch (action.type) {
     case actionTypes.FETCH_QUIZ_REQUEST:
       return initialState;

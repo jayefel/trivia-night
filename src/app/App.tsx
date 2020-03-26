@@ -6,7 +6,7 @@ import ResultsContainer from './results/ResultsContainer';
 import NotFoundComponent from './common/NotFoundComponent';
 import './App.css';
 
-const App = () => {
+const App: React.FC = () => {
   return (
     <Switch>
       <Route exact path='/' component={HomeComponent} />

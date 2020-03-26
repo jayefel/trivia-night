@@ -1,7 +1,9 @@
+import { AppState } from './../reducers';
+
 /**
- * A stub for the app store for testing purposes
+ * A stub for the app state (redux state) for testing purposes
  */
-export const storeStub = {
+export const storeStub: AppState = {
   quiz: {
     score: 0,
     questions: [

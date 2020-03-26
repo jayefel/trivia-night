@@ -1,10 +1,14 @@
 import React from 'react';
-import { shallow } from 'enzyme';
-import QuizContainer from './QuizContainer';
-import LoadingComponent from '../common/LoadingComponent';
-import { storeFactory } from '../../utils/testHelper';
+import configureStore from 'redux-mock-store';
+import { Provider } from 'react-redux';
+import { BrowserRouter } from 'react-router-dom';
+import { mount, ReactWrapper } from 'enzyme';
+import { AppState } from '../../reducers';
 import { quizReducer } from './duck/reducers';
 import { questionsStub } from './__stubs__/questions.stub';
+import { middlewares } from '../../store';
+import QuizContainer from './QuizContainer';
+import LoadingComponent from '../common/LoadingComponent';
 import * as actions from './duck/actions';
 import {
   StartOverLink,
@@ -13,21 +17,34 @@ import {
   QuizErrorComponent
 } from './QuizComponent';
 
-const setup = (initialState = {}) => {
-  const store = storeFactory(initialState);
-  const wrapper = shallow(<QuizContainer store={store} />).dive().dive();
+const mockStore = configureStore(middlewares);
+const historyMock = { push: jest.fn() } as any;
+
+const setup = (initialState: AppState) => {
+  const store = mockStore(initialState);
+
+  const wrapper = mount(
+    <Provider store={store}>
+      <BrowserRouter>
+        <QuizContainer history={historyMock} />
+      </BrowserRouter>
+    </Provider>
+  );
+
   return wrapper;
 };
 
 describe('the QuizComponent', () => {
   describe('during loading phase', () => {
-    let wrapper;
+    let wrapper: ReactWrapper;
 
     beforeEach(() => {
-      const quiz = quizReducer(null, actions.fetchQuizRequest());
-      const store = storeFactory({ quiz });
-      wrapper = shallow(<QuizContainer store={store} />).dive().dive();
-      return wrapper;
+      const quiz = quizReducer(null!, actions.fetchQuizRequest());
+      wrapper = setup({ quiz });
+    });
+
+    afterAll(() => {
+      wrapper.unmount();
     });
 
     it('should show the loading component while fetching data', () => {
@@ -36,11 +53,15 @@ describe('the QuizComponent', () => {
   });
 
   describe('with fetched data and no errors', () => {
-    let wrapper;
+    let wrapper: ReactWrapper;
 
     beforeEach(() => {
-      const initialState = { quiz: quizReducer(null, actions.fetchQuizSuccess(questionsStub)) };
+      const initialState: AppState = { quiz: quizReducer(null!, actions.fetchQuizSuccess(questionsStub)) };
       wrapper = setup(initialState);
+    });
+
+    afterAll(() => {
+      wrapper.unmount();
     });
 
     it('should render without errors', () => {
@@ -67,9 +88,10 @@ describe('the QuizComponent', () => {
   describe('with error during fetch', () => {
     it('should show the error message', () => {
       const error = new Error('An error occured while fetching the quiz.');
-      const initialState = { quiz: quizReducer(null, actions.fetchQuizFailed(error)) };
+      const initialState: AppState = { quiz: quizReducer(null!, actions.fetchQuizFailed(error)) };
       const wrapper = setup(initialState);
       expect(wrapper.find(QuizErrorComponent)).toHaveLength(1);
+      wrapper.unmount();
     });
   });
 });

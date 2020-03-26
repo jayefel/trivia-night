@@ -1,9 +1,14 @@
 import * as actions from "./actions";
-import * as actionTypes from "./types";
-import { storeStub } from "../../../utils/store.stub";
+import * as actionTypes from "./actionTypes";
+import { storeStub } from './../../../utils/store.stub';
+import {
+  FetchQuizSuccessAction,
+  FetchQuizFailedAction,
+  FetchQuizRequestAction
+} from './types';
 
 describe('the fetchQuizRequest action creator', () => {
-  let action;
+  let action: FetchQuizRequestAction;
 
   beforeEach(() => {
     action = actions.fetchQuizRequest();
@@ -13,13 +18,14 @@ describe('the fetchQuizRequest action creator', () => {
     expect(action.type).toEqual(actionTypes.FETCH_QUIZ_REQUEST);
   });
 
-  it('should have the correct payload', () => {
-    expect(action.payload).toBeFalsy();
+  it('should have no payload information', () => {
+    expect(Object.keys(action)).not.toContain('payload');
   });
 });
 
 describe('the fetchQuizSuccess action creator', () => {
-  let action, payload = storeStub.quiz;
+  let action: FetchQuizSuccessAction;
+  let payload = storeStub.quiz;
 
   beforeEach(() => {
     action = actions.fetchQuizSuccess(payload);
@@ -35,7 +41,8 @@ describe('the fetchQuizSuccess action creator', () => {
 });
 
 describe('the fetchQuizFailed action creator', () => {
-  let action, error;
+  let action: FetchQuizFailedAction;
+  let error: Error;
 
   beforeEach(() => {
     error = new Error('An error occured!');

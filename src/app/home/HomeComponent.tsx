@@ -1,8 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import './HomeComponent.css';
 
-const HomeComponent = () => {
+const HomeComponent = (): JSX.Element => {
   return (
     <div className="intro-container">
       <h2 className="heading">Welcome to Trivia Night!</h2>

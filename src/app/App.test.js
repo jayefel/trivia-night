@@ -1,10 +1,10 @@
 import React from 'react';
-import thunk from 'redux-thunk';
 import configureStore from 'redux-mock-store';
 import { shallow, mount } from "enzyme";
 import { MemoryRouter } from 'react-router';
 import { storeStub } from '../utils/store.stub';
 import { Provider } from 'react-redux';
+import { middlewares } from '../store';
 import App from './App';
 import HomeComponent from './home/HomeComponent';
 import QuizComponent from './quiz/QuizComponent';
@@ -27,10 +27,11 @@ describe('the app router', () => {
     );
 
     expect(wrapper.find(HomeComponent)).toHaveLength(1);
+    wrapper.unmount();
   });
 
   it('should successfully render the quiz page when the route is `/quiz`', () => {
-    const mockStore = configureStore([thunk]);
+    const mockStore = configureStore(middlewares);
     const store = mockStore(storeStub);
     const wrapper = mount(
       <Provider store={store}>
@@ -41,10 +42,11 @@ describe('the app router', () => {
     );
 
     expect(wrapper.find(QuizComponent)).toHaveLength(1);
+    wrapper.unmount();
   });
 
   it('should successfully render the results page when the route is `/quiz`', () => {
-    const mockStore = configureStore([thunk]);
+    const mockStore = configureStore(middlewares);
     const storeState = { ...storeStub };
     storeState.quiz.completed = true;
     const store = mockStore(storeState);
@@ -57,10 +59,11 @@ describe('the app router', () => {
     );
 
     expect(wrapper.find(ResultsComponent)).toHaveLength(1);
+    wrapper.unmount();
   });
 
   it('should navigate back to the homepage if there is no results to show while on the `/results` page', () => {
-    const mockStore = configureStore([thunk]);
+    const mockStore = configureStore(middlewares);
     const storeState = { ...storeStub };
     storeState.quiz.completed = false;
     const store = mockStore(storeState);
@@ -73,6 +76,7 @@ describe('the app router', () => {
     );
 
     expect(wrapper.find(HomeComponent)).toHaveLength(1);
+    wrapper.unmount();
   });
 
   it('should show page not found when a route is invalid', () => {
@@ -83,5 +87,6 @@ describe('the app router', () => {
     );
 
     expect(wrapper.find(NotFoundComponent)).toHaveLength(1);
-  })
+    wrapper.unmount();
+  });
 });

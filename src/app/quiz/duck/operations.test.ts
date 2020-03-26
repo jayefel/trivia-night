@@ -1,10 +1,14 @@
-import thunk from 'redux-thunk';
-import configureStore from 'redux-mock-store';
-import operations from './operations';
 import moxios from 'moxios';
+import configureStore from 'redux-mock-store';
+import { ThunkDispatch } from 'redux-thunk';
+import { middlewares } from './../../../store';
+import { AppState } from './../../../reducers';
+import { FetchQuizActions } from './types';
+import operations from './operations';
 
-const middlewares = [thunk];
-const mockStore = configureStore(middlewares);
+type DispatchExts = ThunkDispatch<AppState, void, FetchQuizActions>;
+
+const mockStore = configureStore<{}, DispatchExts>(middlewares);
 
 describe('fetchQuiz operation', () => {
   beforeEach(() => {
@@ -40,7 +44,7 @@ describe('fetchQuiz operation', () => {
       })
     });
 
-    const store = mockStore({});
+    const store = mockStore();
 
     return store.dispatch(operations.fetchQuiz())
       .then(() => {

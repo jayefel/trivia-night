@@ -1,6 +1,14 @@
 import Axios from 'axios';
+import { ThunkDispatch, ThunkAction } from 'redux-thunk';
 import { decode } from 'he';
-import { Dispatch } from 'redux';
+import { AppState } from './../../../reducers';
+import {
+  Question,
+  FetchQuizFailedAction,
+  FetchQuizRequestAction,
+  FetchQuizSuccessAction,
+  FetchQuizActions,
+} from './types';
 import {
   fetchQuizRequest,
   fetchQuizSuccess,
@@ -8,18 +16,11 @@ import {
   submitAnswer
 } from './actions';
 
-type Question = {
-  id: number,
-  category: string,
-  question: string,
-  correctAnswer: boolean
-};
+export const fetchQuiz = (): ThunkAction<Promise<void>, AppState, void, FetchQuizActions> => {
+  return (dispatch: ThunkDispatch<{}, {}, FetchQuizActions>): Promise<void> => {
+    dispatch<FetchQuizRequestAction>(fetchQuizRequest());
 
-export const fetchQuiz = () => {
-  return (dispatch: Dispatch) => {
-    dispatch(fetchQuizRequest());
-
-    return Axios.get('https://opentdb.com/api.php?amount=10&difficulty=hard&type=boolean')
+    return Axios.get<Question[]>('https://opentdb.com/api.php?amount=10&difficulty=hard&type=boolean')
       .then((res: any) => {
         const questions: Question[] = res.data.results.map((question: any, index: number) => ({
           id: index,
@@ -29,10 +30,10 @@ export const fetchQuiz = () => {
           userResponse: null
         }));
 
-        dispatch(fetchQuizSuccess(questions));
+        dispatch<FetchQuizSuccessAction>(fetchQuizSuccess(questions));
       })
-      .catch((err: Error) => {
-        dispatch(fetchQuizFailed(err))
+      .catch((error: Error) => {
+        dispatch<FetchQuizFailedAction>(fetchQuizFailed(error));
       });
   };
 };

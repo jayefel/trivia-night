@@ -1,6 +1,6 @@
 import React from 'react';
 
-const LoadingComponent = () => {
+const LoadingComponent = (): JSX.Element => {
   return (
     <img src="/img/loading.svg" alt="loading..." />
   )

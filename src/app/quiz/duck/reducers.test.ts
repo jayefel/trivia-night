@@ -1,11 +1,17 @@
+import { Quiz } from './types';
 import { initialState, quizReducer } from './reducers';
 import { storeStub } from '../../../utils/store.stub';
-import { submitAnswer, fetchQuizRequest, fetchQuizSuccess, fetchQuizFailed } from './actions';
+import {
+  submitAnswer,
+  fetchQuizRequest,
+  fetchQuizSuccess,
+  fetchQuizFailed
+} from './actions';
 
 describe('quizReudcer ', () => {
   describe('when handling the action type FETCH_QUIZ_REQUEST', () => {
     it('the new state has a status of loading', () => {
-      const newState = quizReducer([], fetchQuizRequest());
+      const newState = quizReducer(null!, fetchQuizRequest());
       expect(newState.loading).toBeTruthy();
     });
   });
@@ -35,7 +41,8 @@ describe('quizReudcer ', () => {
 
   describe('when handling the action type SUBMIT_ANSWER', () => {
     describe('the `complete` field of the quiz', () => {
-      let previousState, newState;
+      let previousState: Quiz;
+      let newState: Quiz;
 
       beforeEach(() => {
         previousState = { ...storeStub.quiz };
@@ -65,7 +72,7 @@ describe('quizReudcer ', () => {
     });
 
     describe('the `score` field of the quiz', () => {
-      let previousState;
+      let previousState: Quiz;
 
       beforeEach(() => {
         previousState = { ...storeStub.quiz };
@@ -90,7 +97,7 @@ describe('quizReudcer ', () => {
 
     describe('when handling an action of `unknown` type', () => {
       it('should return the previous state without any modifications', () => {
-        const newState = quizReducer([], {});
+        const newState = quizReducer([] as any, {} as any);
         expect(newState).toEqual([]);
       });
     });

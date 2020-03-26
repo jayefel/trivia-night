@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { History } from 'history';
+import { DispatchProps, StateProps } from './QuizContainer';
 import LoadingComponent from '../common/LoadingComponent';
 import './QuizComponent.css';
 
@@ -7,17 +9,46 @@ export const QuizErrorComponent = () => {
   return <h1 className="quiz-fetch-error">An error occured while loading the game.</h1>;
 };
 
+/**
+ * A memoized start over link component
+ * a bit of an overkill for such a small component
+ * just for demo purposes
+ */
 export const StartOverLink = React.memo(() => (
   <Link className="mx-auto restart-btn" to="/">
     <i className="fa fa-redo"></i> Start Over
   </Link>
 ));
 
-export const QuestionPagination = ({ currentQuestionIndex, totalNumOfQuestions }) => (
-  <p>{currentQuestionIndex + 1} of {totalNumOfQuestions}</p>
-);
+/**
+ * QuestionPagination
+ * Responsible for showing the question number the user is on, as well as the total number of questions
+ */
+interface QuestionPaginationProps {
+  currentQuestionIndex: number;
+  totalNumOfQuestions: number
+}
 
-export const UserResponseButtons = ({ handleUserResponse }) => (
+export const QuestionPagination: React.FC<QuestionPaginationProps> = ({
+  currentQuestionIndex,
+  totalNumOfQuestions
+}) => {
+  return <p>{currentQuestionIndex + 1} of {totalNumOfQuestions}</p>
+};
+
+/**
+ * UserResponseButtons Component
+ * Shows the TRUE and FALSE buttons that allow the user to respond and advance to the next question
+ */
+interface UserResponseButtonsProps {
+  handleUserResponse: (answer: boolean) => void
+}
+
+/**
+ * 
+ * @param param0 
+ */
+export const UserResponseButtons: React.FC<UserResponseButtonsProps> = ({ handleUserResponse }) => (
   <div className="response-buttons-container">
     <button className="btn btn-md btn-success" onClick={() => handleUserResponse(true)}>
       <i className="fa fa-thumbs-up"></i> TRUE
@@ -28,7 +59,20 @@ export const UserResponseButtons = ({ handleUserResponse }) => (
   </div>
 );
 
-const QuizComponent = ({
+/**
+ * Interface for QuizComponent props
+ */
+interface QuizComponentProps extends DispatchProps, StateProps {
+  history: History;
+}
+
+/**
+ * The main component that fetches the quiz from the api and render the quiz to the user
+ * @function QuizComponent
+ * @param {*} props
+ * @return {React.Component}
+ */
+const QuizComponent: React.FC<QuizComponentProps> = ({
   history,
   quiz: { questions, loading, error },
   fetchQuiz,
@@ -36,11 +80,12 @@ const QuizComponent = ({
 }) => {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
 
-  const handleUserResponse = userResponse => {
+  const handleUserResponse = (userResponse: boolean) => {
     submitAnswer({
       questionIndex: currentQuestionIndex,
       userResponse
     });
+
     setCurrentQuestionIndex(current => current + 1);
 
     if (currentQuestionIndex === questions.length - 1) {
@@ -52,13 +97,8 @@ const QuizComponent = ({
     fetchQuiz();
   }, [fetchQuiz]);
 
-  if (error) {
-    return <QuizErrorComponent />;
-  }
-
-  if (loading) {
-    return <LoadingComponent />;
-  }
+  if (error) { return <QuizErrorComponent />; }
+  if (loading) { return <LoadingComponent />; }
 
   const {
     category,
