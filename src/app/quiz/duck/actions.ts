@@ -7,11 +7,24 @@ import {
   SubmitAnswerAction
 } from './types';
 
+/**
+ * @function fetchQuizRequest
+ * An action creator for the FETCH_QUIZ_REQUEST action.
+ * @returns FetchQuizRequestAction
+ */
+
 export const fetchQuizRequest = (): FetchQuizRequestAction => {
   return {
     type: actionTypes.FETCH_QUIZ_REQUEST
   };
 };
+
+/**
+ * @function fetchQuizSuccess
+ * An action creator for the FETCH_QUIZ_SUCCESS action.
+ * @param questions
+ * @returns FetchQuizSuccessAction
+ */
 
 export const fetchQuizSuccess = (questions: any): FetchQuizSuccessAction => {
   return {
@@ -20,12 +33,26 @@ export const fetchQuizSuccess = (questions: any): FetchQuizSuccessAction => {
   };
 };
 
+/**
+ * @function fetchQuizFailed
+ * An action creator for the FETCH_QUIZ_FAILED action.
+ * @param error
+ * @returns FetchQuizFailedAction
+ */
+
 export const fetchQuizFailed = (error: Error): FetchQuizFailedAction => {
   return {
     type: actionTypes.FETCH_QUIZ_FAILED,
     payload: error
   };
 };
+
+/**
+ * @function submitAnswer
+ * An action creator for the SUBMIT_ANSWER action.
+ * @param userResponse
+ * @returns SubmitAnswerAction
+ */
 
 export const submitAnswer = (userResponse: UserResponse): SubmitAnswerAction => {
   return {

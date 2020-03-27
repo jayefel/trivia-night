@@ -4,6 +4,14 @@ import { Quiz } from '../quiz/duck/types';
 import QuestionResponseComponent from './QuestionResponseComponent';
 import './ResultsComponent.css';
 
+/**
+ * @function ResultsComponent
+ * Shows the score and detailed responses to each question asked in the quiz
+ * as well as a PLAY AGAIN button that will restart the game. 
+ * @param props
+ * @returns JSX.Element
+ */
+
 interface ResultsComponentProps {
   quiz: Quiz;
 }

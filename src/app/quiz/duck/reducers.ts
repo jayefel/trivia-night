@@ -11,10 +11,10 @@ export const initialState: Quiz = {
 };
 
 /**
- * Reducer for questions, responsible for fetching questions from the provided API or fail
  * @function quizReducer
- * @param state - current state of the store
- * @param action - action to be applied ot the state
+ * A reducer for questions, responsible for fetching questions from the provided API or fail
+ * @param state
+ * @param action
  */
 export const quizReducer: Reducer<Quiz, FetchQuizActions> = (state = initialState, action): Quiz => {
   switch (action.type) {

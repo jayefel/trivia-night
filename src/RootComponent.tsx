@@ -1,8 +1,16 @@
 import React from 'react';
 import { Provider } from "react-redux";
 import { BrowserRouter } from 'react-router-dom';
-import store from "./store";
 import ErrorBoundary from './app/common/ErrorBoundary';
+import store from "./store";
+
+/**
+ * @function RootComponent
+ * The root level component responsible for providing
+ * an error boundary, the redux store, and a router to the application. 
+ * @param props
+ * @returns JSX.Element
+ */
 
 interface RootComponentProps {
   children?: JSX.Element

@@ -12,6 +12,7 @@ import ResultsComponent from './ResultsComponent';
  * @param WrappedComponent - ReactType
  * @returns {React.Component} - HOC
  */
+
 const withRedirectIfQuizIncomplete = (WrappedComponent: ReactType) => {
   return class extends React.Component<{ quiz: Quiz, history: History }> {
     componentDidMount() {

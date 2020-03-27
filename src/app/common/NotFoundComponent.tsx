@@ -1,7 +1,14 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-function NotFoundComponent(): JSX.Element {
+/**
+ * @function NotFoundComponent
+ * The page not found component to show when a user navigates to 
+ * a page that is not defined in the app router.
+ * @returns JSX.Element
+ */
+
+const NotFoundComponent: React.FC = () => {
   return (
     <div>
       <h1>404</h1>

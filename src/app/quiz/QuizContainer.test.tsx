@@ -21,8 +21,7 @@ const mockStore = configureStore(middlewares);
 const historyMock = { push: jest.fn() } as any;
 
 const setup = (initialState: AppState) => {
-  const store = mockStore(initialState);
-
+  const store = mockStore({ ...initialState });
   const wrapper = mount(
     <Provider store={store}>
       <BrowserRouter>

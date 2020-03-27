@@ -1,3 +1,8 @@
+/**
+ * A stub to mimic the response from the API request
+ * meant to be used as a stub for moxios, but can be used
+ * on it's own as well, if needed.
+ */
 export const questionsStub = [
   {
     category: "Entertainment: Video Games",

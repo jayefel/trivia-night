@@ -9,11 +9,12 @@ interface ErrorBoundaryState {
 }
 
 /**
- * An Error Boundary to catch any UI errors and gracefully show an error page
  * @class ErrorBoundary
- * @params {ErrorBoundaryProps} props
+ * An Error Boundary to catch any UI errors and gracefully show an error page.
+ * @param ErrorBoundaryProps
  * @returns JSX.Element
  */
+
 class ErrorBoundary extends React.Component<ErrorBoundaryProps, ErrorBoundaryState> {
   constructor(props: ErrorBoundaryProps) {
     super(props);

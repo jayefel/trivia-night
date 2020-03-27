@@ -1,6 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
+/**
+ * @function HomeComponent
+ * The first page that users see when they open up the app
+ * shows the name of the game, instructions, and a button to start the game.
+ * @returns JSX.Element
+ */
+
 const HomeComponent = (): JSX.Element => {
   return (
     <div className="intro-container">

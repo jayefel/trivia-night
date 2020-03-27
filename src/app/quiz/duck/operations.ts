@@ -1,6 +1,6 @@
 import Axios from 'axios';
-import { ThunkDispatch, ThunkAction } from 'redux-thunk';
 import { decode } from 'he';
+import { ThunkDispatch, ThunkAction } from 'redux-thunk';
 import { AppState } from './../../../reducers';
 import {
   Question,
@@ -15,6 +15,14 @@ import {
   fetchQuizFailed,
   submitAnswer
 } from './actions';
+
+/**
+ * @function fetchQuiz
+ * A thunk action that dispatches actions in the following order:
+ * fetchQuizRequest > fetchQuizRequestSuccess (if the request is successful), or
+ * fetchQuizRequest > fetchQuizRequestFailed (if the request failed)
+ * @returns ThunkAction
+ */
 
 export const fetchQuiz = (): ThunkAction<Promise<void>, AppState, void, FetchQuizActions> => {
   return (dispatch: ThunkDispatch<{}, {}, FetchQuizActions>): Promise<void> => {

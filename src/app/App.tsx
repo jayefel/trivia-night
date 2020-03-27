@@ -6,6 +6,12 @@ import ResultsContainer from './results/ResultsContainer';
 import NotFoundComponent from './common/NotFoundComponent';
 import './App.css';
 
+/**
+ * @function App
+ * A list of routes are listed in this component for the BrowserRouter 
+ * provided in RootComponent.
+ * @returns Routes
+ */
 const App: React.FC = () => {
   return (
     <Switch>

@@ -1,6 +1,13 @@
 import React from 'react';
 import { Question, Quiz } from '../quiz/duck/types';
 
+/**
+ * @function QuestionResponseRow
+ * Shows ONE question and the user's corresponding answer
+ * @param props
+ * @returns JSX.Element
+ */
+
 interface QuestionResponseRowProps {
   question: Question;
   correctness: boolean;
@@ -24,6 +31,13 @@ const QuestionResponseRow: React.FC<QuestionResponseRowProps> = ({
     </div>
   )
 };
+
+/**
+ * @function QuestionResponseComponent
+ * Shows ALL of the questions and user's responses. 
+ * @param props
+ * @returns JSX.Element
+ */
 
 interface QuestionResponseProps {
   quiz: Quiz
