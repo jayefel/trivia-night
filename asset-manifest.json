@@ -1,26 +1,26 @@
 {
   "files": {
-    "main.css": "/static/css/main.a3c62bd5.chunk.css",
-    "main.js": "/static/js/main.82aafcad.chunk.js",
-    "main.js.map": "/static/js/main.82aafcad.chunk.js.map",
-    "runtime-main.js": "/static/js/runtime-main.42d2e5d0.js",
-    "runtime-main.js.map": "/static/js/runtime-main.42d2e5d0.js.map",
-    "static/css/2.e6f51e71.chunk.css": "/static/css/2.e6f51e71.chunk.css",
-    "static/js/2.dadba1a2.chunk.js": "/static/js/2.dadba1a2.chunk.js",
-    "static/js/2.dadba1a2.chunk.js.map": "/static/js/2.dadba1a2.chunk.js.map",
-    "index.html": "/index.html",
-    "precache-manifest.ed6001d39809a9e0e17dd41351ab67dc.js": "/precache-manifest.ed6001d39809a9e0e17dd41351ab67dc.js",
-    "service-worker.js": "/service-worker.js",
-    "static/css/2.e6f51e71.chunk.css.map": "/static/css/2.e6f51e71.chunk.css.map",
-    "static/css/main.a3c62bd5.chunk.css.map": "/static/css/main.a3c62bd5.chunk.css.map",
-    "static/js/2.dadba1a2.chunk.js.LICENSE.txt": "/static/js/2.dadba1a2.chunk.js.LICENSE.txt",
-    "static/media/font-awesome.min.css": "/static/media/fontawesome-webfont.fee66e71.woff"
+    "main.css": "/trivia-night/static/css/main.a3c62bd5.chunk.css",
+    "main.js": "/trivia-night/static/js/main.f4b383a3.chunk.js",
+    "main.js.map": "/trivia-night/static/js/main.f4b383a3.chunk.js.map",
+    "runtime-main.js": "/trivia-night/static/js/runtime-main.e25acff1.js",
+    "runtime-main.js.map": "/trivia-night/static/js/runtime-main.e25acff1.js.map",
+    "static/css/2.d46cf080.chunk.css": "/trivia-night/static/css/2.d46cf080.chunk.css",
+    "static/js/2.dadba1a2.chunk.js": "/trivia-night/static/js/2.dadba1a2.chunk.js",
+    "static/js/2.dadba1a2.chunk.js.map": "/trivia-night/static/js/2.dadba1a2.chunk.js.map",
+    "index.html": "/trivia-night/index.html",
+    "precache-manifest.2b49e9adf86b3352110a8d1efafec4c2.js": "/trivia-night/precache-manifest.2b49e9adf86b3352110a8d1efafec4c2.js",
+    "service-worker.js": "/trivia-night/service-worker.js",
+    "static/css/2.d46cf080.chunk.css.map": "/trivia-night/static/css/2.d46cf080.chunk.css.map",
+    "static/css/main.a3c62bd5.chunk.css.map": "/trivia-night/static/css/main.a3c62bd5.chunk.css.map",
+    "static/js/2.dadba1a2.chunk.js.LICENSE.txt": "/trivia-night/static/js/2.dadba1a2.chunk.js.LICENSE.txt",
+    "static/media/font-awesome.min.css": "/trivia-night/static/media/fontawesome-webfont.fee66e71.woff"
   },
   "entrypoints": [
-    "static/js/runtime-main.42d2e5d0.js",
-    "static/css/2.e6f51e71.chunk.css",
+    "static/js/runtime-main.e25acff1.js",
+    "static/css/2.d46cf080.chunk.css",
     "static/js/2.dadba1a2.chunk.js",
     "static/css/main.a3c62bd5.chunk.css",
-    "static/js/main.82aafcad.chunk.js"
+    "static/js/main.f4b383a3.chunk.js"
   ]
 }
