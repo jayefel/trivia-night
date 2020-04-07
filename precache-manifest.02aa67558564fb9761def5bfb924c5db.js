@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "3d9368b5e0a5d5ba6003f45baa2d4d28",
+    "revision": "3c605284a54477c5f58e95108d1cd34c",
     "url": "/trivia-night/index.html"
   },
   {
@@ -8,7 +8,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/trivia-night/static/css/2.d46cf080.chunk.css"
   },
   {
-    "revision": "1a12a9d2d9db20e41683",
+    "revision": "1f361a1f4a307ae84cf9",
     "url": "/trivia-night/static/css/main.a3c62bd5.chunk.css"
   },
   {
@@ -20,8 +20,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/trivia-night/static/js/2.dadba1a2.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "1a12a9d2d9db20e41683",
-    "url": "/trivia-night/static/js/main.f4b383a3.chunk.js"
+    "revision": "1f361a1f4a307ae84cf9",
+    "url": "/trivia-night/static/js/main.7b93f5be.chunk.js"
   },
   {
     "revision": "1953d6b64f913caa78ae",
